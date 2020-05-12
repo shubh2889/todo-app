@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <script src="https://use.fontawesome.com/cdf2c57f5b.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous">
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/home.css">
+        
+    </head>
+    <body>
+        <div id="container">
+            <h1 class="container-heading">TODO APP</h1>
+            <form action="/new-task" method="POST" id="add-new-task">              
+                <div id="description-container">
+                    <label for="description">DESCRIPTION</label><br>
+                    <input type="text" name="description" id="description" placeholder="What do you need to do?">
+               </div>
+               <div class="div2">
+                    <div id="category-container">
+                        <label for="category">CATEGORY</label><br>
+                        <select id="category" name="category">
+                            <option default disabled selected>Choose a Category</option>
+                            <option value="PERSONAL">Personal</option>
+                            <option value="WORK">Work</option>
+                            <option value="SCHOOL">School</option>
+                            <option value="CLEANING">Cleaning</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                     <div id="due-date-container">
+                        <label for="dueDate">DUE DATE</label>
+                        <input type="date" name="dueDate" id="due-date">
+                    </div>
+                </div>
+            </form>
+
+            <div class="btn">
+                <button type="submit" form="add-new-task">
+                    <i class="fa fa-plus"></i>
+                    <span>
+                         ADD TASK
+                    </span>
+                </button>
+                <button type="submit" id="dlt-btn">
+                    <i class="fa fa-trash"></i>
+                    <span>DELETE TASKS </span>
+                </button>
+                    
+            </div>                  
+            
+            
+
+            <div class="task-list-container">
+                <ul>
+                    <% for (let i of task_list) { %>
+                        <li class="tasks">  
+                            <div class="details">
+                                <label>
+                                    <input type="checkbox" name="checkbox"  class="pending-todo" value="<%= i._id %>" >
+                                    <div class="task-detail">
+                                        <p>
+                                            <%= i.description %>
+                                        </p>
+                                        <span>
+                                            <i class="fa fa-calendar"></i>
+                                            <%= moment(i.dueDate).format('MMM D, YYYY') %>
+                                        </span>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="category-card">
+                                <p>
+                                    <%= i.category %>
+                                </p>
+                            </div>
+                            
+                        </li>
+                        
+                    <% } %>
+                </ul>
+            </div>
+
+
+
+        </div>
+        <script src="/js/script.js"></script>
+    </body>
+</html>
